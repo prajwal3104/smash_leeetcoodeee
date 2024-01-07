@@ -1,22 +1,23 @@
+#include <vector>
+#include <algorithm>
+
 class Solution {
 public:
-    int areaOfMaxDiagonal(vector<vector<int>>& dimensions) {
-        int n = dimensions.size();
-        long long maxDiagonal = 0;
-        long long maxArea = 0;
+    int areaOfMaxDiagonal(std::vector<std::vector<int>>& v) {
+        int maxDiagonalSquared = 0;
+        int maxArea = 0;
 
-        for (int i = 0; i < n; i++) {
-            int length = dimensions[i][0];
-            int width = dimensions[i][1];
+        for (const auto& i : v) {
+            int currentDiagonalSquared = i[0] * i[0] + i[1] * i[1];
 
-            long long diagonal = static_cast<long long>(length) * length + width * width;
-
-            if (diagonal > maxDiagonal || (diagonal == maxDiagonal && static_cast<long long>(length) * width > maxArea)) {
-                maxDiagonal = diagonal;
-                maxArea = static_cast<long long>(length) * width;
+            if (currentDiagonalSquared > maxDiagonalSquared) {
+                maxDiagonalSquared = currentDiagonalSquared;
+                maxArea = i[0] * i[1];
+            } else if (currentDiagonalSquared == maxDiagonalSquared) {
+                maxArea = std::max(maxArea, i[0] * i[1]);
             }
         }
 
-        return static_cast<int>(maxArea);
+        return maxArea;
     }
 };
