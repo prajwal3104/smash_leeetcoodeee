@@ -9,7 +9,7 @@ public:
 
         for (int i = 0; i < n - 1; i++) {
             if (nums[i] > nums[i + 1]) {
-                return i;  // Peak found
+                return i;
             }
         }
 
