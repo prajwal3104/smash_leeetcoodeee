@@ -1,14 +1,20 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int XOR = 0;
-        int n= nums.size();
-        for(int i=0; i<=n; i++){
-            XOR = XOR ^ i;
+        int n = nums.size();
+        vector<int> hash(n + 1, 0);
+        
+        for(int i = 0; i < n; i++){
+            hash[nums[i]]++;
         }
-        for(auto it: nums){
-            XOR = XOR ^ it;
+        
+        for(int i = 0; i <= n; i++){
+            if(hash[i] == 0){
+                return i;
+            }
         }
-        return XOR;
+        
+        return -1;
+        
     }
 };
