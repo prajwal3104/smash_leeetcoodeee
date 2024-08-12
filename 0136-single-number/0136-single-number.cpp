@@ -2,17 +2,12 @@ class Solution {
 public:
     int singleNumber(vector<int>& nums) {
         int n = nums.size();
-        int temp;
+        int temp =0;
         
         for(int i = 0; i < n; i++){
-            temp = nums[i];
-            int cnt = 0;
-            for(int j = 0; j < n; j++){
-                if(nums[j] == temp) cnt++;
-            }
-            if(cnt == 1) return temp;
+            temp = temp^nums[i];   
         }
-        return -1;
+        return temp;
     }
 };
 
