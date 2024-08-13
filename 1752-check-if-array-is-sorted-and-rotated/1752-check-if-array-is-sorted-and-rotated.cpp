@@ -1,18 +1,24 @@
 class Solution {
 public:
     bool check(vector<int>& nums) {
-        int count =0;
-        int n=nums.size();
-        for(int i=1;i<nums.size();i++){
-            if(nums[i-1]>nums[i]){
-                count++;
+        vector<int> temp = nums;
+        int n = nums.size();
+        
+        for(int i = 0; i < n; i++){
+            temp.push_back(nums[i]);
+        }
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i < temp.size(); i++){
+            if(nums[0] == temp[i]){
+                int x = i;
+                int j = 0;
+                for(j = 0; j < n && x < temp.size(); j++){
+                    if(temp[x] != nums[j]) break;
+                    x++;
+                }
+                if(j == n) return true;
             }
         }
-        if(nums[n-1]>nums[0]){
-            count++;
-        }
-        return count<=1;
-        
-        
+        return false;
     }
 };
